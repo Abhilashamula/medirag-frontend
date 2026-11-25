@@ -1,0 +1,316 @@
+
+.medirag-chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px);
+  min-height: 520px;
+  background: #ffffff;
+  border: 1px solid #e3ece8;
+  border-radius: 18px;
+  overflow: hidden;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.medirag-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px;
+  border-bottom: 1px solid #e6eeea;
+}
+
+.medirag-chat-header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #173f32;
+}
+
+.medirag-chat-header p {
+  margin: 6px 0 0;
+  color: #788b82;
+  font-size: 13px;
+}
+
+.medirag-chat-status {
+  color: #087f68;
+  background: #e7f5ee;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.medirag-chat-mode {
+  display: flex;
+  gap: 10px;
+  padding: 14px 28px;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.medirag-chat-mode button {
+  background: #f3f7f5;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #536a5e;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.medirag-chat-mode button.active {
+  background: #e0f3e9;
+  color: #087f68;
+  border-color: #a7dcc5;
+}
+
+.medirag-chat-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #fbfdfc;
+}
+
+.medirag-chat-welcome {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  max-width: 590px;
+}
+
+.medirag-chat-avatar {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 18px;
+  color: white;
+  background: linear-gradient(135deg, #087f68, #27ae83);
+  font-size: 30px;
+}
+
+.medirag-chat-welcome h2 {
+  margin: 0 0 10px;
+  color: #163d30;
+  font-size: 25px;
+}
+
+.medirag-chat-welcome p {
+  color: #71867b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.medirag-chat-suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.medirag-chat-suggestions button {
+  text-align: left;
+  padding: 16px;
+  background: white;
+  border: 1px solid #dfeae4;
+  border-radius: 12px;
+  color: #315b48;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.medirag-chat-suggestions button:hover {
+  border-color: #0b9877;
+  background: #f1faf5;
+}
+
+.medirag-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  gap: 6px;
+}
+
+.medirag-message-user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.medirag-message-assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.medirag-message-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #647b6e;
+}
+
+.medirag-message-bubble {
+  padding: 15px 19px;
+  border-radius: 15px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.medirag-message-user .medirag-message-bubble {
+  background: #087f68;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.medirag-message-assistant .medirag-message-bubble {
+  background: white;
+  color: #253e32;
+  border: 1px solid #e0eae4;
+  border-bottom-left-radius: 4px;
+}
+
+.medirag-message-bubble.error {
+  border-color: #efb4b4;
+  color: #a53636;
+}
+
+.medirag-chat-sources {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #496a59;
+}
+
+.medirag-chat-source {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px;
+  background: #eef8f2;
+  border: 1px solid #d4eadd;
+  border-radius: 9px;
+  overflow-wrap: anywhere;
+}
+
+.medirag-chat-source small {
+  color: #6b8879;
+}
+
+.medirag-chat-bottom {
+  padding: 16px 24px 14px;
+  border-top: 1px solid #e6eeea;
+  background: white;
+}
+
+.medirag-chat-warning {
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #906523;
+  line-height: 1.5;
+}
+
+.medirag-chat-input {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d6e5dc;
+  border-radius: 13px;
+  background: #fcfefd;
+}
+
+.medirag-chat-input:focus-within {
+  border-color: #087f68;
+}
+
+.medirag-chat-input textarea {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: #203b2e;
+  padding: 8px;
+}
+
+.medirag-chat-input button {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 10px;
+  background: #087f68;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.medirag-chat-input button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.medirag-chat-footer {
+  margin: 9px 0 0;
+  text-align: center;
+  color: #9aaba1;
+  font-size: 11px;
+}
+
+.medirag-chat-thinking {
+  color: #087f68;
+}
+
+.medirag-chat-dots {
+  display: inline-block;
+  animation: medirag-pulse 1s infinite alternate;
+}
+
+@keyframes medirag-pulse {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .medirag-chat {
+    height: calc(100dvh - 120px);
+    min-height: 400px;
+  }
+
+  .medirag-chat-header,
+  .medirag-chat-mode,
+  .medirag-chat-messages {
+    padding: 16px;
+  }
+
+  .medirag-chat-suggestions {
+    grid-template-columns: 1fr;
+  }
+
+  .medirag-message {
+    max-width: 96%;
+  }
+
+  .medirag-chat-bottom {
+    padding: 12px;
+  }
+
+  .medirag-chat-status {
+    display: none;
+  }
+}
