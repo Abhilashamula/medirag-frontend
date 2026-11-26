@@ -314,3 +314,222 @@
     display: none;
   }
 }
+
+/* ========================================
+   MEDIRAG CHAT ENHANCEMENTS
+======================================== */
+
+.medirag-chat {
+  margin: 24px;
+}
+
+.medirag-chat-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.medirag-chat-brand-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: #087f68;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.medirag-chat-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.medirag-new-chat {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.medirag-knowledge-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 28px;
+  background: #f6faf8;
+  border-bottom: 1px solid #e3ece7;
+}
+
+.medirag-knowledge-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #31574a;
+  font-size: 12px;
+}
+
+.medirag-knowledge-refresh {
+  width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 4px;
+  font-size: 16px;
+  border-radius: 7px;
+}
+
+.medirag-knowledge-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.medirag-kb-ready,
+.medirag-kb-processing,
+.medirag-kb-failed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.medirag-kb-ready {
+  color: #087f68;
+}
+
+.medirag-kb-processing {
+  color: #2563eb;
+}
+
+.medirag-kb-failed,
+.medirag-knowledge-error {
+  color: #be3547;
+}
+
+.medirag-knowledge-error {
+  font-size: 12px;
+}
+
+.medirag-kb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #087f68;
+}
+
+.medirag-chat-notice {
+  margin: 12px 24px 0;
+  padding: 12px 15px;
+  background: #fffbeb;
+  border: 1px solid #f0e3b7;
+  border-radius: 9px;
+  color: #92600e;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.medirag-message-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.medirag-message-mode {
+  padding: 3px 7px;
+  background: #edf3ef;
+  border-radius: 5px;
+  color: #71867b;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.medirag-context-found,
+.medirag-context-missing {
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.medirag-context-found {
+  background: #e8f5f0;
+  color: #087f68;
+}
+
+.medirag-context-missing {
+  background: #fff7e6;
+  color: #92600e;
+}
+
+.medirag-source-disclaimer {
+  font-size: 11px;
+  color: #81918b;
+  line-height: 1.5;
+}
+
+.medirag-chat-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.medirag-chat-mode button:hover:not(:disabled) {
+  background: #e8f5f0;
+  color: #087f68;
+}
+
+.medirag-chat-suggestions button:hover:not(:disabled) {
+  background: #f1faf5;
+  color: #315b48;
+}
+
+.medirag-chat-input textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+@media (max-width: 768px) {
+
+  .medirag-chat {
+    margin: 12px;
+    height: calc(100dvh - 24px);
+  }
+
+  .medirag-chat-header {
+    flex-wrap: wrap;
+  }
+
+  .medirag-knowledge-base {
+    padding: 12px 16px;
+  }
+
+  .medirag-chat-notice {
+    margin: 10px 12px 0;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .medirag-chat {
+    height: calc(100dvh - 140px);
+    min-height: 480px;
+  }
+
+  .medirag-chat-brand-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .medirag-chat-header h1 {
+    font-size: 18px;
+  }
+
+  .medirag-knowledge-stats {
+    gap: 10px;
+  }
+}

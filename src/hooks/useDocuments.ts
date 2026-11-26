@@ -13,7 +13,6 @@ import type { Document } from "../types/document";
 export function isDocumentProcessing(
   document: Document
 ): boolean {
-
   return (
     document.processingStatus === "QUEUED" ||
     document.processingStatus === "INDEXING" ||
@@ -22,22 +21,32 @@ export function isDocumentProcessing(
 }
 
 export function useDocuments() {
-
   const [documents, setDocuments] =
     useState<Document[]>([]);
 
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState("");
-
-  const [initialized, setInitialized] =
-    useState(false);
+  const [initialized, setInitialized] = useState(false);
 
   const requestRef =
     useRef<AbortController | null>(null);
 
+  const timerRef =
+    useRef<number | null>(null);
+
+  const mountedRef = useRef(false);
+
   const loadDocuments = useCallback(
-    async (silent = false) => {
+    async function refreshDocuments(
+      silent = false
+    ): Promise<void> {
+
+      if (!mountedRef.current) return;
+
+      if (timerRef.current !== null) {
+        window.clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
 
       requestRef.current?.abort();
 
@@ -49,14 +58,18 @@ export function useDocuments() {
         setLoading(true);
       }
 
-      try {
+      let shouldPoll = false;
 
+      try {
         const response =
           await documentService.getAllDocuments(
             controller.signal
           );
 
-        if (controller.signal.aborted) {
+        if (
+          controller.signal.aborted ||
+          !mountedRef.current
+        ) {
           return;
         }
 
@@ -64,9 +77,16 @@ export function useDocuments() {
         setInitialized(true);
         setError("");
 
+        shouldPoll = response.some(
+          isDocumentProcessing
+        );
+
       } catch (err) {
 
-        if (controller.signal.aborted) {
+        if (
+          controller.signal.aborted ||
+          !mountedRef.current
+        ) {
           return;
         }
 
@@ -80,10 +100,24 @@ export function useDocuments() {
           "Please check the backend connection."
         );
 
+        shouldPoll = true;
+
       } finally {
 
-        if (!controller.signal.aborted) {
+        if (
+          !controller.signal.aborted &&
+          mountedRef.current
+        ) {
+
           setLoading(false);
+
+          if (shouldPoll) {
+
+            timerRef.current =
+              window.setTimeout(() => {
+                void refreshDocuments(true);
+              }, 3000);
+          }
         }
       }
     },
@@ -92,56 +126,34 @@ export function useDocuments() {
 
   useEffect(() => {
 
+    mountedRef.current = true;
+
     void loadDocuments();
 
     return () => {
+
+      mountedRef.current = false;
+
       requestRef.current?.abort();
+
+      if (timerRef.current !== null) {
+        window.clearTimeout(timerRef.current);
+      }
     };
 
   }, [loadDocuments]);
+
+  const readyCount = documents.filter(
+    (doc) => doc.processingStatus === "READY"
+  ).length;
 
   const processingCount = documents.filter(
     isDocumentProcessing
   ).length;
 
-  const readyCount = documents.filter(
-    (document) =>
-      document.processingStatus === "READY"
-  ).length;
-
   const failedCount = documents.filter(
-    (document) =>
-      document.processingStatus === "FAILED"
+    (doc) => doc.processingStatus === "FAILED"
   ).length;
-
-  useEffect(() => {
-
-    // Continue refreshing while processing
-    // or recovering from a connection error.
-
-    if (processingCount === 0 && !error) {
-      return;
-    }
-
-    const interval = window.setInterval(() => {
-
-      if (
-        requestRef.current &&
-        !requestRef.current.signal.aborted
-      ) {
-        // Requests are cancelled before refreshing.
-        // See loadDocuments.
-      }
-
-      void loadDocuments(true);
-
-    }, 3000);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-
-  }, [processingCount, error, loadDocuments]);
 
   return {
     documents,
